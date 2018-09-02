@@ -19,19 +19,17 @@ app.controller('weatherCtrl', function($scope, $http){
     function getWeather(normalTemp) {
         var normalHumidity = 50;
         var ipKey = "fb6f335ba1f18db50eed591823f74686";
-        var weatherUrl = 'http://api.openweathermap.org/data/2.5/box/city?bbox=-24,-120,75,120,15&APPID=' + ipKey;
+        var weatherUrl = 'https://api.openweathermap.org/data/2.5/box/city?bbox=-24,-120,75,120,15&APPID=' + ipKey;
 
         $http.get(weatherUrl).success(function(data){
             var cityList = data.list;
+
+
             cityList.forEach(function (item) {
                 item.diff = Math.sqrt((normalTemp - item.main.temp)*(normalTemp - item.main.temp) + (normalHumidity - item.main.humidity)*(normalHumidity - item.main.humidity)).toFixed(5);
             });
 
             cityList.sort( function( a, b ) { return a.diff - b.diff; } );
-
-            // cityList.forEach(function (item) {
-            //     console.log(item.diff);
-            // });
 
             vm.bestCity = cityList[0];
 
