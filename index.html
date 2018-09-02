@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body ng-app="weatherApp" class="body-block">
+<div class="main-wrapper">
+    <div ng-controller="weatherCtrl" class="container background-block">
+        <div class="head-block"><h2>{{ heading }}</h2></div>
+        <div class="check-block">
+            <div class="form-check">
+                <label class="form-check-label">
+                    Male(+21&#176;C)
+                    <input class="form-check-input"
+                           ng-model="gender"
+                           ng-change='chooseGender(gender)'
+                           type="radio"
+                           value="male">
+                </label>
+                <label class="form-check-label" >
+                    Female(+22&#176;C)
+                    <input class="form-check-input"
+                           ng-model="gender"
+                           ng-change='chooseGender(gender)'
+                           type="radio"
+                           value="female">
+                </label>
+            </div>
+
+        </div>
+
+        <div ng-hide="bestCity" class="spinner-block">
+            <div class="spinner-inner">
+                <i class="fa fa-spinner fa-spin" style="font-size:40px"></i>
+            </div>
+        </div>
+        <div class="col-md-12  content-block">
+            The best city for you is:  {{ bestCity.name }}
+            <div>Temperature: +{{ bestCity.main.temp }} &#176;C</div>
+            <div>Humidity: {{ bestCity.main.humidity }} %</div>
+        </div>
+
+        <div class="col-md-12">
+            <h3 class="table-head">Also top 5 Cities:</h3>
+            <table class="table table-block">
+                <tr>
+                    <th class="col">City</th>
+                    <th class="col">Temperature</th>
+                    <th class="col">Humidity</th>
+                </tr>
+                <tr ng-repeat="city in weatherList">
+                    <td>{{ city.name }}</td>
+                    <td>+{{ city.main.temp }} &#176;C</td>
+                    <td>{{ city.main.humidity }} %</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="angular-1.5.0/angular.min.js"></script>
+<!--<script src="underscore/underscore-min.js"></script>-->
+<script src="controller.js"></script>
+</body>
+</html>
